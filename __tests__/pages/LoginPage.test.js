@@ -1,4 +1,6 @@
 const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
+const axios = require('axios')
+const {host} = require('../../scrape.config')
 
 describe('Test if / route renders whitout errors', () => {
   beforeAll(async () => {
@@ -13,9 +15,8 @@ describe('Test if / route renders whitout errors', () => {
 
   test('setup page', async () => {
     page = await openPage('');
-    setTimeout(() => {
-      expect(true)
-    }, 5000)
+    page.waitForSelector('#navbar', { timeout: 10000 });
+    expect(true)
   })
 
   test('test nabvar renders correctly', async () => {
@@ -281,8 +282,16 @@ describe('Test if / route renders whitout errors', () => {
   }, 20000)
 
   test('test if Login nav to Home when credentials are correct', async () => {
+
+    await axios.post(host + 'api/auth/signup', {
+      email: "aitor@tilla4.com",
+      password: "1Aasdfghjklñ",
+      fullname: "abcdfg",
+      language: "en"
+    })
+
     const selectorEmail = 'input[name="email"]';
-    const textEmail = 'aitor@tilla.com';
+    const textEmail = 'aitor@tilla4.com';
     await typeInInput(selectorEmail, textEmail, page);
 
     const selectorPassword = 'input[name="password"]';
@@ -301,6 +310,13 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
+
+    await axios.post(host + 'api/users/deleteUser', {
+      email: "aitor@tilla4.com",
+      password: "1Aasdfghjklñ",
+      language: "en"
+    })
+
     expect(isHomeOpen).toBeTruthy()
   }, 20000)
 });

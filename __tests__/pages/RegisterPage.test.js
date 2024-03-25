@@ -1,4 +1,6 @@
 const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
+const {host} = require('../../scrape.config')
+const axios = require('axios')
 
 describe('Test if /register route renders whitout errors', () => {
   beforeAll(async () => {
@@ -13,9 +15,8 @@ describe('Test if /register route renders whitout errors', () => {
 
   test('setup page', async () => {
     page = await openPage('register');
-    setTimeout(() => {
-      expect(true)
-    }, 5000)
+    page.waitForSelector('#navbar', { timeout: 10000 });
+    expect(true)
   })
 
  test('test nabvar renders correctly', async () => {
@@ -63,7 +64,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText === "Password must be at least 8 characters long.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must be at least 8 characters long.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -103,7 +104,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password must contain at least one lowercase letter.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must contain at least one lowercase letter.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -143,7 +144,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password must contain at least one uppercase letter.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must contain at least one uppercase letter.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -183,7 +184,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password must contain at least one digit.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must contain at least one digit.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -224,7 +225,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "The password can not contain spaces") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "The password can not contain spaces") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -264,7 +265,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password can not contain special characters") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password can not contain special characters") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -304,7 +305,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Name must have at least two characters") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Name must have at least two characters") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -320,19 +321,33 @@ describe('Test if /register route renders whitout errors', () => {
   }, 20000)
 
   test('test if Register throws error when user already exist', async () => {
+
+    await axios.post(host + 'api/auth/signup', {
+      email: "aitor1@tilla.com",
+      password: "1Aasdfghjklñ",
+      fullname: "abcdfg",
+      language: "en"
+  })
+
     const selectorEmail = 'input[name="email"]';
-    const textEmail = 'aitor@tilla.com';
+    const textEmail = 'aitor1@tilla.com';
     await typeInInput(selectorEmail, textEmail, page);
 
     const selectorPassword = 'input[name="password"]';
-    const textPassword = 'Bbbbb1bbbbbbbbbbbbbbbbbbb';
+    const textPassword = '1Aasdfghjklñ';
     await typeInInput(selectorPassword, textPassword, page);
 
     const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fulln';
+    const textFullName = 'abcdfg';
     await typeInInput(selectorFullName, textFullName, page);
 
     await clickElement('#buttonRegister', page)
+
+    await axios.post(host + 'api/users/deleteUser', {
+      email: "aitor1@tilla.com",
+      password: "1Aasdfghjklñ",
+      language: "en"
+  })
 
     const isAlertPresent = await page.evaluate(() => {
       return new Promise(resolve => {
@@ -344,7 +359,7 @@ describe('Test if /register route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "User already exist") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "User already exists") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -362,7 +377,7 @@ describe('Test if /register route renders whitout errors', () => {
 
   test('test if Register nav to Home when credentials are correct', async () => {
     const selectorEmail = 'input[name="email"]';
-    const textEmail = 'aitor1@tilla1.com';
+    const textEmail = 'aitor2@tilla2.com';
     await typeInInput(selectorEmail, textEmail, page);
 
     const selectorPassword = 'input[name="password"]';
@@ -370,7 +385,7 @@ describe('Test if /register route renders whitout errors', () => {
     await typeInInput(selectorPassword, textPassword, page);
 
     const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fullname1';
+    const textFullName = '1234asdf';
     await typeInInput(selectorFullName, textFullName, page);
 
     await clickElement('#buttonRegister', page)
@@ -380,11 +395,18 @@ describe('Test if /register route renders whitout errors', () => {
         const checkExistence = () => {
           const homeDiv = document.querySelector('#homePage');
           if (homeDiv) resolve(true)
-         else setTimeout(checkExistence, 500);
+          else setTimeout(checkExistence, 500);
         };
         checkExistence();
       });
     });
+
+    await axios.post(host + 'api/users/deleteUser', {
+      email: "aitor2@tilla2.com",
+      password: "1Aasdfghjklñ",
+      language: "en"
+  })
+
     expect(isHomeOpen).toBeTruthy()
   }, 20000)
 });
