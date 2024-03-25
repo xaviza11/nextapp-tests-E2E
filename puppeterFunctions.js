@@ -16,6 +16,7 @@ async function openPage(pageUrl) {
   if (typeof pageUrl !== 'string') throw new Error('Page URL must be a string');
 
   const page = await browser.newPage();
+  console.log('testing page: ' + host + pageUrl)
   await page.goto(host + pageUrl);
   return page;
 }

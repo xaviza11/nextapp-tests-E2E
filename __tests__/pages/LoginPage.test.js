@@ -13,12 +13,14 @@ describe('Test if / route renders whitout errors', () => {
 
   test('setup page', async () => {
     page = await openPage('');
-    expect(true)
+    setTimeout(() => {
+      expect(true)
+    }, 5000)
   })
 
- test('test nabvar renders correctly', async () => {
+  test('test nabvar renders correctly', async () => {
     const extractedElement = await extractElement(page, '#navbar')
-    expect(extractedElement).toContain('NextAuth');
+    expect(extractedElement).toContain('SocialEv');
     expect(extractedElement).toContain('Sign In');
     expect(extractedElement).toContain('Register');
     expect(extractedElement).toContain('About');
@@ -27,11 +29,9 @@ describe('Test if / route renders whitout errors', () => {
   test('test form renders correctly', async () => {
     const extractedElement = await extractElement(page, '#formLogin')
     expect(extractedElement).toContain('Sign In');
-    expect(extractedElement).toContain('Email');
-    expect(extractedElement).toContain('Password');
     expect(extractedElement).toContain('Enter your Email');
     expect(extractedElement).toContain('Enter your Password');
-    expect(extractedElement).toContain('buttonLogin');
+    expect(extractedElement).toContain('Log In');
   }, 20000);
 
   test('test if Login throws error when user not exist', async () => {
@@ -55,7 +55,7 @@ describe('Test if / route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText === 'User not exist') setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === 'User not exist') setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -90,7 +90,7 @@ describe('Test if / route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText === "Password must be at least 8 characters long.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must be at least 8 characters long.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -125,7 +125,7 @@ describe('Test if / route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password must contain at least one lowercase letter.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must contain at least one lowercase letter.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -160,7 +160,7 @@ describe('Test if / route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password must contain at least one uppercase letter.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must contain at least one uppercase letter.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -195,7 +195,7 @@ describe('Test if / route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password must contain at least one digit.") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password must contain at least one digit.") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -231,7 +231,7 @@ describe('Test if / route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "The password can not contain spaces") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "The password can not contain spaces") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -266,7 +266,7 @@ describe('Test if / route renders whitout errors', () => {
             if (statusElement && messageElement) {
               const statusText = statusElement.textContent.trim();
               const messageText = messageElement.textContent.trim();
-              if (statusText === 'warning' && messageText ===  "Password can not contain special characters") setTimeout(() => {resolve(true)}, 2000)
+              if (statusText === 'warning' && messageText === "Password can not contain special characters") setTimeout(() => { resolve(true) }, 2000)
               else resolve(false)
             }
           }
@@ -296,7 +296,7 @@ describe('Test if / route renders whitout errors', () => {
         const checkExistence = () => {
           const homeDiv = document.querySelector('#homePage');
           if (homeDiv) resolve(true)
-         else setTimeout(checkExistence, 500);
+          else setTimeout(checkExistence, 500);
         };
         checkExistence();
       });

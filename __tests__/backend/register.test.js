@@ -110,7 +110,7 @@ describe('Authentication tests', () => {
     test('register throw 409 when user already exists', async () => {
         try {
             const response = await axios.post(url, {
-                email: "aitor@tilla.com.",
+                email: "aitor@tilla.com",
                 password: "A1aAAAAAAAAAAAAA",
                 fullname: "faffgaf",
                 language: "en"

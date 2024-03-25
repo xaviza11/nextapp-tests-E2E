@@ -13,12 +13,14 @@ describe('Test if /register route renders whitout errors', () => {
 
   test('setup page', async () => {
     page = await openPage('register');
-    expect(true)
+    setTimeout(() => {
+      expect(true)
+    }, 5000)
   })
 
  test('test nabvar renders correctly', async () => {
     const extractedElement = await extractElement(page, '#navbar')
-    expect(extractedElement).toContain('NextAuth');
+    expect(extractedElement).toContain('SocialEv');
     expect(extractedElement).toContain('Sign In');
     expect(extractedElement).toContain('Register');
     expect(extractedElement).toContain('About');
