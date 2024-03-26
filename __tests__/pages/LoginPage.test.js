@@ -21,7 +21,7 @@ describe('Test if / route renders whitout errors', () => {
 
   test('test nabvar renders correctly', async () => {
     const extractedElement = await extractElement(page, '#navbar')
-    expect(extractedElement).toContain('SocialEv');
+    expect(extractedElement).toContain('FlightSimWay');
     expect(extractedElement).toContain('Sign In');
     expect(extractedElement).toContain('Register');
     expect(extractedElement).toContain('About');
