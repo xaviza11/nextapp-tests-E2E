@@ -1,25 +1,33 @@
 const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
-const {host} = require('../../scrape.config')
+const { host } = require('../../scrape.config')
 const axios = require('axios')
+const chalk = require('chalk')
 
 describe('Test if /register route renders whitout errors', () => {
+
+  let page
+
   beforeAll(async () => {
     await startBrowser();
-  });
+    console.log(chalk.blue('Page needs compilation'))
+    try {
+      console.log(chalk.blue('Starting compilation process'))
+      page = await openPage('register');
+      await page.waitForSelector('#navbar', { timeout: 1 });
+    } catch (error) {
+      await closeBrowser()
+      console.log(chalk.green('Page has been compiled'))
+      await startBrowser()
+      page = await openPage('register');
+      await page.waitForSelector('#navbar', { timeout: 10000 });
+    }
+  }, 30000);
 
   afterAll(async () => {
     await closeBrowser();
   });
 
-  let page
-
-  test('setup page', async () => {
-    page = await openPage('register');
-    page.waitForSelector('#navbar', { timeout: 10000 });
-    expect(true)
-  })
-
- test('test nabvar renders correctly', async () => {
+  test('test nabvar renders correctly', async () => {
     const extractedElement = await extractElement(page, '#navbar')
     expect(extractedElement).toContain('FlightSimWay');
     expect(extractedElement).toContain('Sign In');
@@ -202,7 +210,7 @@ describe('Test if /register route renders whitout errors', () => {
 
   test('test if Register throws error when pasword has spaces', async () => {
     const selectorEmail = 'input[name="email"]';
-    const textEmail = 'aitor1@tilla.com';
+    const textEmail = 'aitor121@tilla.com';
     await typeInInput(selectorEmail, textEmail, page);
 
     const selectorPassword = 'input[name="password"]';
@@ -327,7 +335,7 @@ describe('Test if /register route renders whitout errors', () => {
       password: "1Aasdfghjklñ",
       fullname: "abcdfg",
       language: "en"
-  })
+    })
 
     const selectorEmail = 'input[name="email"]';
     const textEmail = 'aitor1@tilla.com';
@@ -347,7 +355,7 @@ describe('Test if /register route renders whitout errors', () => {
       email: "aitor1@tilla.com",
       password: "1Aasdfghjklñ",
       language: "en"
-  })
+    })
 
     const isAlertPresent = await page.evaluate(() => {
       return new Promise(resolve => {
@@ -405,7 +413,7 @@ describe('Test if /register route renders whitout errors', () => {
       email: "aitor2@tilla2.com",
       password: "1Aasdfghjklñ",
       language: "en"
-  })
+    })
 
     expect(isHomeOpen).toBeTruthy()
   }, 20000)

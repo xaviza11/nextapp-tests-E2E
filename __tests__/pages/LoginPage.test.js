@@ -1,23 +1,31 @@
 const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
 const axios = require('axios')
 const {host} = require('../../scrape.config')
+const chalk = require('chalk')
 
 describe('Test if / route renders whitout errors', () => {
+
+  let page
+
   beforeAll(async () => {
     await startBrowser();
-  });
+    console.log(chalk.blue('Page needs compilation'))
+    try {
+      console.log(chalk.blue('Starting compilation process'))
+      page = await openPage('');
+      await page.waitForSelector('#navbar', { timeout: 1 });
+    } catch (error) {
+      await closeBrowser()
+      console.log(chalk.green('Page has been compiled'))
+      await startBrowser()
+      page = await openPage('');
+      await page.waitForSelector('#navbar', { timeout: 10000 })
+    }
+  }, 30000);
 
   afterAll(async () => {
     await closeBrowser();
   });
-
-  let page
-
-  test('setup page', async () => {
-    page = await openPage('');
-    page.waitForSelector('#navbar', { timeout: 10000 });
-    expect(true)
-  })
 
   test('test nabvar renders correctly', async () => {
     const extractedElement = await extractElement(page, '#navbar')
