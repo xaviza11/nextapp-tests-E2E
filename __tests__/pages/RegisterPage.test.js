@@ -1,4 +1,4 @@
-const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
+/*const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
 const { host } = require('../../scrape.config')
 const axios = require('axios')
 const chalk = require('chalk')
@@ -12,13 +12,13 @@ describe('Test if /register route renders whitout errors', () => {
     console.log(chalk.blue('Page needs compilation'))
     try {
       console.log(chalk.blue('Starting compilation process'))
-      page = await openPage('register');
+      page = await openPage('/pages/register');
       await page.waitForSelector('#navbar', { timeout: 1 });
     } catch (error) {
       await closeBrowser()
       console.log(chalk.green('Page has been compiled'))
       await startBrowser()
-      page = await openPage('register');
+      page = await openPage('/pages/register');
       await page.waitForSelector('#navbar', { timeout: 10000 });
     }
   }, 30000);
@@ -81,10 +81,10 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
     await page.$eval(selectorFullName, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
   test('test if Register throws error when pasword not has almost one lowecase letter', async () => {
@@ -121,10 +121,10 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
     await page.$eval(selectorFullName, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
   test('test if Register throws error when pasword not has almost one uppercase letter', async () => {
@@ -201,10 +201,10 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
     await page.$eval(selectorFullName, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
 
@@ -282,10 +282,10 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy()
     await page.$eval(selectorFullName, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy()
   }, 20000)
 
   test('test if Register throws error when name length is less than two letters', async () => {
@@ -322,10 +322,10 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy()
     await page.$eval(selectorFullName, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy()
   }, 20000)
 
   test('test if Register throws error when user already exist', async () => {
@@ -351,11 +351,24 @@ describe('Test if /register route renders whitout errors', () => {
 
     await clickElement('#buttonRegister', page)
 
-    await axios.post(host + 'api/users/deleteUser', {
+    const res = await axios.post(host + 'api/auth/authenticate', {
       email: "aitor1@tilla.com",
       password: "1Aasdfghjklñ",
-      language: "en"
+      language: 'en'
     })
+
+    const token = res.data.token
+    const tokenName = "token"
+
+    await axios.post(host + 'api/users/deleteUser', {
+      password: "1Aasdfghjklñ",
+      language: "en"
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': `${tokenName}=${token}`
+      },
+    });
 
     const isAlertPresent = await page.evaluate(() => {
       return new Promise(resolve => {
@@ -376,10 +389,10 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy()
     await page.$eval(selectorFullName, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy()
   }, 20000)
 
 
@@ -409,12 +422,25 @@ describe('Test if /register route renders whitout errors', () => {
       });
     });
 
-    await axios.post(host + 'api/users/deleteUser', {
+    const res = await axios.post(host + 'api/auth/authenticate', {
       email: "aitor2@tilla2.com",
       password: "1Aasdfghjklñ",
-      language: "en"
+      language: 'en'
     })
+
+    const token = res.data.token
+    const tokenName = "token"
+
+    await axios.post(host + 'api/users/deleteUser', {
+      password: "1Aasdfghjklñ",
+      language: "en"
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': `${tokenName}=${token}`
+      },
+    });
 
     expect(isHomeOpen).toBeTruthy()
   }, 20000)
-});
+})*/

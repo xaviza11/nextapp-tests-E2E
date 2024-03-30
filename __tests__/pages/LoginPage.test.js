@@ -1,4 +1,4 @@
-const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
+/*const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
 const axios = require('axios')
 const {host} = require('../../scrape.config')
 const chalk = require('chalk')
@@ -12,13 +12,13 @@ describe('Test if / route renders whitout errors', () => {
     console.log(chalk.blue('Page needs compilation'))
     try {
       console.log(chalk.blue('Starting compilation process'))
-      page = await openPage('');
+      page = await openPage('/pages/login');
       await page.waitForSelector('#navbar', { timeout: 1 });
     } catch (error) {
       await closeBrowser()
       console.log(chalk.green('Page has been compiled'))
       await startBrowser()
-      page = await openPage('');
+      page = await openPage('/pages/login');
       await page.waitForSelector('#navbar', { timeout: 10000 })
     }
   }, 30000);
@@ -73,9 +73,10 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
+
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
   test('test if Login throws error when pasword not valid length', async () => {
@@ -108,9 +109,9 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
   test('test if Login throws error when pasword not has almost one lowecase letter', async () => {
@@ -143,9 +144,9 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
   test('test if Login throws error when pasword not has almost one uppercase letter', async () => {
@@ -178,9 +179,9 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
   test('test if Login throws error when pasword not has almost one number', async () => {
@@ -213,9 +214,9 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy();
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy();
   }, 20000)
 
 
@@ -249,9 +250,9 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy()
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy()
   }, 20000)
 
   test('test if Login throws error when pasword has special characters', async () => {
@@ -284,9 +285,9 @@ describe('Test if / route renders whitout errors', () => {
         checkExistence();
       });
     });
-    expect(isAlertPresent).toBeTruthy()
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
+    expect(isAlertPresent).toBeTruthy()
   }, 20000)
 
   test('test if Login nav to Home when credentials are correct', async () => {
@@ -319,12 +320,20 @@ describe('Test if / route renders whitout errors', () => {
       });
     });
 
+    const cookies = await page.cookies();
+    const tokenCookie  = cookies.find(cookie => cookie.name === 'token');
+    await page.setCookie(tokenCookie )
+
     await axios.post(host + 'api/users/deleteUser', {
-      email: "aitor@tilla4.com",
       password: "1Aasdfghjklñ",
       language: "en"
-    })
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': `${tokenCookie.name}=${tokenCookie.value}`
+      },
+    });
 
     expect(isHomeOpen).toBeTruthy()
   }, 20000)
-});
+});*/

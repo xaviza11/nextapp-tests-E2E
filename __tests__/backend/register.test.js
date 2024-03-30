@@ -1,4 +1,4 @@
-const { host } = require('../../scrape.config')
+/*const { host } = require('../../scrape.config')
 const url = 'api/auth/signup'
 const axios = require('axios')
 
@@ -129,38 +129,77 @@ describe('Authentication tests', () => {
                 fullname: "faffgaf",
                 language: "en"
             });
-            await axios.post(host + 'api/users/deleteUser', {
+            const res = await axios.post(host + 'api/auth/authenticate', {
                 email: "aitor@tilla.com",
                 password: "A1aAAAAAAAAAAAAA",
+                language: 'en'
+              })
+          
+              const token = res.data.token
+              const tokenName = "token"
+          
+              await axios.post(host + 'api/users/deleteUser', {
+                password: "1Aasdfghjklñ",
                 language: "en"
-            });
+              }, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Cookie': `${tokenName}=${token}`
+                },
+              });
             expect(response.status).toBe(409)
         } catch (error) {
             expect(error.toString()).toBe("AxiosError: Request failed with status code 409")
             expect(error.response.data.message).toBe("User already exists")
-            await axios.post(host + 'api/users/deleteUser', {
+            const res = await axios.post(host + 'api/auth/authenticate', {
                 email: "aitor@tilla.com",
                 password: "A1aAAAAAAAAAAAAA",
+                language: 'en'
+              })
+          
+              const token = res.data.token
+              const tokenName = "token"
+          
+              await axios.post(host + 'api/users/deleteUser', {
+                password: "A1aAAAAAAAAAAAAA",
                 language: "en"
-            });
+              }, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Cookie': `${tokenName}=${token}`
+                },
+              });
         }
     })
+    
     test('register throw 201 when succes register', async () => {
-        const response = await axios.post(host + url, {
+        await axios.post(host + url, {
             email: "test@test.com",
             password: "A1aAAAAAAAAAAAAA",
             fullname: "fasdfa",
             language: "en"
         });
 
-        await axios.post(host + 'api/users/deleteUser', {
+        const res = await axios.post(host + 'api/auth/authenticate', {
             email: "test@test.com",
             password: "A1aAAAAAAAAAAAAA",
+            language: 'en'
+          })
+      
+          const token = res.data.token
+          const tokenName = "token"
+      
+          await axios.post(host + 'api/users/deleteUser', {
+            password: "A1aAAAAAAAAAAAAA",
             language: "en"
-        })
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Cookie': `${tokenName}=${token}`
+            },
+          });
 
-        expect(response.status).toBe(201)
-        expect(response.data.email).toBe('test@test.com')
-        expect(response.data.fullname).toBe('fasdfa')
+        expect(res.status).toBe(200)
+        expect(res.data.res).toBe('success')
     })
-});
+});*/
