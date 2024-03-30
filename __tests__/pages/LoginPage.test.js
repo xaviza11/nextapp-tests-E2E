@@ -1,4 +1,4 @@
-/*const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
+const { startBrowser, openPage, closeBrowser, extractElement, typeInInput, clickElement } = require('../../puppeterFunctions');
 const axios = require('axios')
 const {host} = require('../../scrape.config')
 const chalk = require('chalk')
@@ -336,4 +336,4 @@ describe('Test if / route renders whitout errors', () => {
 
     expect(isHomeOpen).toBeTruthy()
   }, 20000)
-});*/
+});

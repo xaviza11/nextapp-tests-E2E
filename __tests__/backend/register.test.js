@@ -1,4 +1,4 @@
-/*const { host } = require('../../scrape.config')
+const { host } = require('../../scrape.config')
 const url = 'api/auth/signup'
 const axios = require('axios')
 
@@ -202,4 +202,4 @@ describe('Authentication tests', () => {
         expect(res.status).toBe(200)
         expect(res.data.res).toBe('success')
     })
-});*/
+});

@@ -1,4 +1,4 @@
-/*const { host } = require('../../scrape.config')
+const { host } = require('../../scrape.config')
 const url = 'api/users/deleteUser'
 const axios = require('axios')
 
@@ -194,4 +194,4 @@ describe('Delete User', () => {
             expect(error.response.data.message).toBe("a")
         }
     })
-})*/
+})
