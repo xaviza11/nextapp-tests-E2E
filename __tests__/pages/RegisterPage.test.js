@@ -56,9 +56,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = '1Aas';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fullname1';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'name1';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -81,7 +81,7 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
     expect(isAlertPresent).toBeTruthy();
@@ -96,9 +96,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = '1ABBBBBBBBBBBBBBBBBBB';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fullname1';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'name1';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -121,7 +121,7 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
     expect(isAlertPresent).toBeTruthy();
@@ -136,9 +136,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = '1bbbbbbbbbbbbbbbbbbbbbbbbb';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fullname1';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'name1';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -162,7 +162,7 @@ describe('Test if /register route renders whitout errors', () => {
       });
     });
     expect(isAlertPresent).toBeTruthy();
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
   }, 20000)
@@ -176,9 +176,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = 'Bbbbbbbbbbbbbbbbbbbbbbbbbb';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fullname1';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'name1';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -201,7 +201,7 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
     expect(isAlertPresent).toBeTruthy();
@@ -217,9 +217,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = 'Bbbbbb1bbbbbbbb bbbbbbbbbbbb';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fullname1';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'name1';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -243,7 +243,7 @@ describe('Test if /register route renders whitout errors', () => {
       });
     });
     expect(isAlertPresent).toBeTruthy()
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
   }, 20000)
@@ -257,9 +257,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = 'Bbbbb1bbbbbbbbbb<bbbbbbbbb';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'fullname1';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'name1';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -282,7 +282,7 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
     expect(isAlertPresent).toBeTruthy()
@@ -297,9 +297,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = 'Bbbbb1bbbbbbbbbbbbbbbbbbb';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'f';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'f';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -322,7 +322,7 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
     expect(isAlertPresent).toBeTruthy()
@@ -333,7 +333,7 @@ describe('Test if /register route renders whitout errors', () => {
     await axios.post(host + 'api/auth/signup', {
       email: "aitor1@tilla.com",
       password: "1Aasdfghjklñ",
-      fullname: "abcdfg",
+      name: "abcdfg",
       language: "en"
     })
 
@@ -345,9 +345,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = '1Aasdfghjklñ';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = 'abcdfg';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = 'abcdfg';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 
@@ -389,7 +389,7 @@ describe('Test if /register route renders whitout errors', () => {
         checkExistence();
       });
     });
-    await page.$eval(selectorFullName, el => el.value = '');
+    await page.$eval(selectorname, el => el.value = '');
     await page.$eval(selectorEmail, el => el.value = '');
     await page.$eval(selectorPassword, el => el.value = '');
     expect(isAlertPresent).toBeTruthy()
@@ -405,9 +405,9 @@ describe('Test if /register route renders whitout errors', () => {
     const textPassword = '1Aasdfghjklñ';
     await typeInInput(selectorPassword, textPassword, page);
 
-    const selectorFullName = 'input[name="fullname"]';
-    const textFullName = '1234asdf';
-    await typeInInput(selectorFullName, textFullName, page);
+    const selectorname = 'input[name="name"]';
+    const textname = '1234asdf';
+    await typeInInput(selectorname, textname, page);
 
     await clickElement('#buttonRegister', page)
 

@@ -2,12 +2,12 @@ const { host } = require('../../scrape.config')
 const url = 'api/users/deleteUser'
 const axios = require('axios')
 
-describe('Delete User', () => {
+describe('Authenticate User', () => {
     test('authenticate user work correctly', async () => {
         await axios.post(host + 'api/auth/signup', {
             email: "test@test.com",
             password: "A1aAAAAAAAAAAAAA",
-            fullname: "fasdfa",
+            name: "fasdfa",
             language: "en"
         });
 

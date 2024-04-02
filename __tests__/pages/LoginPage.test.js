@@ -295,7 +295,7 @@ describe('Test if / route renders whitout errors', () => {
     await axios.post(host + 'api/auth/signup', {
       email: "aitor@tilla4.com",
       password: "1Aasdfghjklñ",
-      fullname: "abcdfg",
+      name: "abcdfg",
       language: "en"
     })
 

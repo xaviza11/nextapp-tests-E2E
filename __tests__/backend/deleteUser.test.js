@@ -9,7 +9,7 @@ describe('Delete User', () => {
             await axios.post(host + 'api/auth/signup', {
                 email: "test@test.com",
                 password: "A1aAAAAAAAAAAAAA",
-                fullname: "fasdfa",
+                name: "fasdfa",
                 language: "en"
             });
 

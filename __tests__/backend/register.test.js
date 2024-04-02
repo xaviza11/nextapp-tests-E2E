@@ -2,13 +2,13 @@ const { host } = require('../../scrape.config')
 const url = 'api/auth/signup'
 const axios = require('axios')
 
-describe('Authentication tests', () => {
+describe('Register test', () => {
     test('register throw 400 when password length is less than 8 chracters', async () => {
         try {
             const response = await axios.post(host + url, {
                 email: "test@example.com",
                 password: "Ppa1",
-                fullname: "fullname",
+                name: "name",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -22,7 +22,7 @@ describe('Authentication tests', () => {
             const response = await axios.post(host + url, {
                 email: "test@example.com",
                 password: "Pp a1asdfasdfasdf",
-                fullname: "fullname",
+                name: "name",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -36,7 +36,7 @@ describe('Authentication tests', () => {
             const response = await axios.post(host + url, {
                 email: "test@example.com",
                 password: "a1asdfasdfasdf",
-                fullname: "fullname",
+                name: "name",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -50,7 +50,7 @@ describe('Authentication tests', () => {
             const response = await axios.post(host + url, {
                 email: "test@example.com",
                 password: "A1AAAAAAAAAAAAA",
-                fullname: "fullname",
+                name: "name",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -64,7 +64,7 @@ describe('Authentication tests', () => {
             const response = await axios.post(host + url, {
                 email: "test@example.com",
                 password: "AaAAAAAAAAAAAAA",
-                fullname: "fullname",
+                name: "name",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -78,7 +78,7 @@ describe('Authentication tests', () => {
             const response = await axios.post(host + url, {
                 email: "test@example.com",
                 password: "A1aAAAAA<AAAAAAAA",
-                fullname: "fullname",
+                name: "name",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -92,7 +92,7 @@ describe('Authentication tests', () => {
             const response = await axios.post(host + url, {
                 email: "test@example.",
                 password: "A1aAAAAAAAAAAAAA",
-                fullname: "fullname",
+                name: "name",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -106,7 +106,7 @@ describe('Authentication tests', () => {
             const response = await axios.post(host + url, {
                 email: "test@example.",
                 password: "A1aAAAAAAAAAAAAA",
-                fullname: "f",
+                name: "f",
                 language: "en"
             });
             expect(response.status).toBe(400)
@@ -120,13 +120,13 @@ describe('Authentication tests', () => {
             await axios.post(host + url, {
                 email: "aitor@tilla.com",
                 password: "A1aAAAAAAAAAAAAA",
-                fullname: "faffgaf",
+                name: "faffgaf",
                 language: "en"
             });
             const response = await axios.post(host + url, {
                 email: "aitor@tilla.com",
                 password: "A1aAAAAAAAAAAAAA",
-                fullname: "faffgaf",
+                name: "faffgaf",
                 language: "en"
             });
             const res = await axios.post(host + 'api/auth/authenticate', {
@@ -176,7 +176,7 @@ describe('Authentication tests', () => {
         await axios.post(host + url, {
             email: "test@test.com",
             password: "A1aAAAAAAAAAAAAA",
-            fullname: "fasdfa",
+            name: "fasdfa",
             language: "en"
         });
 
