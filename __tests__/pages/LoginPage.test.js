@@ -336,4 +336,4 @@ describe('Test if / route renders whitout errors', () => {
 
     expect(isHomeOpen).toBeTruthy()
   }, 20000)
-});
+})
